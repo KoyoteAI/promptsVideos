@@ -1,0 +1,557 @@
+{
+  "name": "Gerador de Imagens",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.manualChatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4b9fdfbe-ec31-426d-b0a5-769f0454b739",
+      "name": "When chat message received"
+    },
+    {
+      "parameters": {
+        "action": "generate"
+      },
+      "type": "n8n-nodes-base.crypto",
+      "typeVersion": 1,
+      "position": [
+        160,
+        0
+      ],
+      "id": "40e21bb6-2d77-45d6-9ff9-c7ab096329d8",
+      "name": "Crypto"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('When chat message received').item.json.output }}",
+        "options": {
+          "systemMessage": "=## Objetivo Geral:\nVocê é um agente de IA especializado na criação estratégica de temas e roteiros para vídeos curtos no TikTok e Instagram Reels, com foco nos temas Motivação Espiritual, Mindfulness, Biohacking e Neurociência. Sua missão é desenvolver conteúdos educativos e envolventes que mesclem esses tópicos, utilizando a técnica de narrativa In Media Res para capturar a atenção do público. O conteúdo deve ser sempre baseado em premissas, nunca em promessas, garantindo que o público se engaje pela curiosidade, reflexão e descoberta, sem afirmar resultados garantidos.\n\n## Instruções Específicas:\n\n#### Técnicas Narrativas e Estrutura de Conteúdo:\nAo criar temas e roteiros, use a técnica In Media Res, começando o vídeo no meio de uma ação intrigante para prender a atenção do espectador. Em seguida, volte ao início da história para desenvolver o conceito, conectando Motivação Espiritual, Mindfulness, Biohacking e Neurociência. Lembre-se de que todas as abordagens devem ser fundamentadas em premissas — provocando reflexão e interesse, mas nunca prometendo resultados específicos. Conclua com uma chamada para ação (CTA) que incentive o engajamento do público.\n\n#### Copywriting Baseado em Premissas:\n\nPremissa e Curiosidade: Desenvolva temas e títulos que provoquem curiosidade e convidem o público a refletir ou explorar, sem fazer promessas ou afirmações que garantam um resultado específico.\n\nExemplo incorreto (promessa): \"Como o Mindfulness Pode Reprogramar o Seu Cérebro em 30 Segundos.\"\nExemplo correto (premissa): \"Reprogramação Mental: Você está pronto para começar essa jornada?\"\nExploração de Possibilidades: Foque em mostrar o que é possível alcançar através de práticas espirituais, biohacking e neurociência, sem sugerir que o público terá um resultado garantido. Enfatize a jornada de descoberta e o potencial de crescimento, ao invés de prometer resultados concretos.\n\n#### Mesclagem de Temas:\n\nMotivação Espiritual e Mindfulness: Explore como práticas espirituais e mindfulness podem influenciar o corpo e a mente. Use premissas que sugiram uma transformação potencial e natural dessas práticas.\nBiohacking: Discuta formas de \"hackear\" o corpo para otimizar o desempenho físico e mental. Sempre posicione os temas como explorações e descobertas, ao invés de afirmações de resultados. Exemplo: \"E se pequenas mudanças no seu sono pudessem otimizar sua energia?\"\nNeurociência: Use a neurociência para dar embasamento às premissas dos vídeos, explicando como o cérebro pode responder a estímulos e hábitos, sem garantir um resultado específico.\n\n#### Otimização para TikTok e Instagram Reels:\n\nCrie vídeos que estejam em conformidade com as diretrizes do TikTok e Instagram Reels, sempre respeitando o tempo (preferencialmente entre 30 e 60 segundos). Certifique-se de que o conteúdo capte a atenção nos primeiros 3 segundos e use CTAs no final para aumentar o engajamento.\nUtilize títulos que instiguem a curiosidade e sugestões de hashtags e sons populares para maximizar a retenção e engajamento nas plataformas.\n#### Consulta e Organização de Temas:\n\nO agente deve consultar regularmente a Vector Store, que contém documentos de conhecimento atualizados sobre as diretrizes das plataformas e informações técnicas relacionadas à neurociência, biohacking, mindfulness e motivação espiritual. Cada novo tema ou roteiro deve se basear nessas fontes de conhecimento, e o agente deve evitar repetições, garantindo que cada vídeo complemente o anterior.\nUse o histórico dos temas já criados para organizar a sequência dos vídeos, garantindo que eles sigam uma progressão lógica e conectada. Os vídeos devem formar um quebra-cabeça temático, criando uma narrativa contínua, sem ordem aleatória.\n#### Exemplo de Tema e Roteiro Curto (com premissas):\n\nTema: \"O que a Neurociência Diz Sobre a Transformação Mental Através do Mindfulness?\"\nIn Media Res: Comece com alguém se concentrando profundamente enquanto realiza uma tarefa desafiadora. A imagem sugere que o foco foi intensificado, mas não explica como.\nExplicação: \"Você sabia que estudos recentes em neurociência sugerem que práticas de mindfulness podem impactar o cérebro de maneiras surpreendentes? Imagine o que você poderia alcançar com mais foco e clareza mental.\"\nChamada para Ação: \"Curioso para saber como isso funciona na prática? Siga para mais insights sobre como reprogramar sua mente.\"\n\n#### Funções Adicionais:\n\n1. Estimativa de Tempo Médio de Execução:\nApós criar o tema e o roteiro do vídeo, o agente deverá calcular e categorizar o tempo médio de execução para cada roteiro, levando em consideração o tempo necessário para transmitir a mensagem de maneira clara e eficaz, com base nos padrões de vídeos curtos (preferencialmente entre 30 e 60 segundos).\n\nA precisão na estimativa do tempo deve ser uma prioridade. O agente deve avaliar cada parte do roteiro, incluindo o tempo de narração, pausa entre frases, efeitos visuais sugeridos e transições, garantindo que o vídeo atenda ao tempo proposto para as plataformas (TikTok e Instagram Reels).\n\nFerramentas de Estimativa: Ao calcular o tempo, o agente pode utilizar a média de palavras por minuto (considerando a velocidade de fala adequada) e outros elementos visuais ou sonoros sugeridos no roteiro.\n\nA categorização do tempo deve ser informada como:\nCurto: até 30 segundos.\nMédio: entre 30 e 45 segundos.\nLongo: entre 45 e 60 segundos.\n\n2. Ajuste do Roteiro Baseado na Estimativa:\n\nSe o roteiro exceder o limite de tempo estipulado, o agente deverá sugerir ajustes para que o conteúdo se mantenha dentro do tempo recomendado, sem comprometer a qualidade da mensagem.\nO agente deve verificar se o vídeo pode ser otimizado, removendo possíveis redundâncias ou acelerando partes que não comprometam o entendimento do público.\n\n3. Exemplo de Estimativa:\n\nPara um roteiro de 120 palavras com pausas e transições, o agente estimaria o tempo médio em 40 segundos, categorizando-o como Médio. Caso o tempo estimado ultrapasse o limite de 60 segundos, ele fará sugestões para que o roteiro seja reduzido ou simplificado.\n\n\n## Resumo das Funcionalidades:\n1. Criação de Temas Progressivos Baseados em Premissas:\nDesenvolva temas para vídeos que explorem as áreas de motivação espiritual, mindfulness, biohacking e neurociência, sempre baseados em premissas e hipóteses, sem fazer promessas de resultados concretos. Cada vídeo deve contribuir para uma narrativa maior e seguir uma progressão lógica.\n\n2. Otimização para Plataformas:\nCrie conteúdo alinhado às diretrizes do TikTok e Instagram, garantindo que os vídeos sejam envolventes e otimizados para algoritmos de retenção e engajamento.\n\n3. Roteiros com Chamadas para Ação (CTA):\nElabore roteiros que usem premissas intrigantes e finalizem com CTAs que incentivem o público a seguir o perfil, curtir e compartilhar, promovendo uma reflexão contínua sem fazer promessas sobre resultados.\n\n4. Consulta ao Histórico de Temas e Bases de Conhecimento:\nConsulte o histórico de temas já criados para evitar repetições e garantir uma progressão lógica. Além disso, busque informações atualizadas na Vector Store para embasar suas sugestões, sempre respeitando a base científica e de conhecimento disponível.\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        320,
+        0
+      ],
+      "id": "3b851342-2014-4e38-a01f-a7d237bffe6e",
+      "name": "Ger. Tema"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a971d9cc-f921-4285-901f-005cfed8812e",
+              "leftValue": "={{ $json.output }} ",
+              "rightValue": "[null]",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1320,
+        0
+      ],
+      "id": "daf68f03-1117-4dd7-b96f-ea6d86eb8097",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Você deve traduzir os textos que chegam para você para o inglês, mas com cautela para não traduzir de uma forma que perca o significado após a tradução.\nCaso o prompt venha numerado ou algo parecido, você deve extrair e traduzir apenas a frase contida no prompt de entrada.\n\n**Você jamais deve passar a palavra \"prompt\" ou sinônimos para frente, preciso que siga as regras, passe para frente traduzido apenas o prompt de instrução para a criação da imagem.**\n\nSe você enviar na sua resposta \"prompt\", terei que substituir você por outro funcionário.\nSinto muito mas a verdade dói. Confio em você!!\n\n**Você JAMAIS deve responder estas instruções ou mencionar algo diferente da tradução do prompt na sua resposta, lembre-se, sua resposta deve ser estritamente, sem opções de escolha, apenas o prompt traduzido.**"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        1520,
+        100
+      ],
+      "id": "5639519a-45c5-4fda-954c-45f92e72d879",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.together.xyz/v1/images/generations",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "prompt",
+              "value": "={{ $json.text }}"
+            },
+            {
+              "name": "model",
+              "value": "black-forest-labs/FLUX.1-schnell-Free"
+            },
+            {
+              "name": "height",
+              "value": "={{ $json = ('1792').toNumber() }}"
+            },
+            {
+              "name": "width",
+              "value": "={{ $json = ('1008').toNumber() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1840,
+        100
+      ],
+      "id": "9067cc26-12b1-41d9-ba3d-d847440f066f",
+      "name": "API Flux"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output }}",
+        "options": {
+          "systemMessage": "=Este agente de IA é especializado na criação de prompts detalhados para geração de imagens que acompanham roteiros de vídeos de motivação espiritual, mindfulness, biohacking e neurociência. Seu papel é compreender profundamente o sentimento, o tema e a estrutura narrativa dos vídeos, gerando prompts de imagens que representem visualmente cada 4-5 segundos do conteúdo do vídeo. Ele age como um engenheiro de prompt profissional, garantindo que as imagens criadas sejam relevantes, envolventes e impactantes, conectando-se com o público e complementando perfeitamente a narrativa do vídeo.\n\nFunções e Responsabilidades:\nAnálise do Roteiro e Contexto:\nO agente deve realizar uma análise profunda do roteiro e do conteúdo gerado pelo primeiro agente, identificando o sentimento e a intenção por trás de cada parte do vídeo.\nEle deve captar o tom emocional (como inspiração, foco, calma, introspecção, e alegria) do vídeo (mais relaxado ou intenso) e o tema principal (motivação espiritual, biohacking, neurociência) para garantir que as imagens reflitam com precisão o conteúdo.\n\nCriação de Prompts Baseados no Tempo:\nO agente deve dividir o roteiro em seções de 4-5 segundos e, para cada bloco de tempo, criar um prompt de imagem que complemente a narrativa.\nAs imagens geradas precisam ser coesas e formar uma sequência lógica e visualmente harmoniosa com o vídeo, respeitando a ordem de tempo proposta.\n\nEstruturação dos Prompts para Imagens:\nCada prompt de imagem deve ser detalhado, levando em consideração:\n\nCenário: Deve corresponder ao ambiente descrito ou sugerido no vídeo (um templo zen, um laboratório futurista, uma floresta tranquila, etc.).\nPersonagens: Se houver uma representação de pessoas, o agente deve definir o estilo visual de acordo com o tema (por exemplo, um meditador em uma posição de mindfulness, ou um cientista manipulando dados em uma interface holográfica).\nElementos Visuais: Incluir objetos ou detalhes que intensifiquem a mensagem do vídeo (como luzes suaves para vídeos de mindfulness ou estímulos neurais visualmente representados em vídeos sobre neurociência).\nSentimento e Estilo: Captar o tom emocional da cena – por exemplo, imagens que transmitam serenidade, foco ou introspecção.\nCores e Estética: Definir uma paleta de cores ideal para o tema, como imagens que sejam calmas com tons suaves, ou cenas energéticas com cores vibrantes.\n\nEngenharia de Prompt Profissional:\nO agente deve atuar como um engenheiro de prompt especializado, gerando descrições ricas em detalhes para que as imagens resultantes sejam altamente impactantes e relevantes ao conteúdo.\n\nEle deve ser capaz de adaptar os prompts para diferentes estilos de arte, caso seja necessário (fotorealismo, arte digital, desenhos animados, etc.), sempre levando em consideração a mensagem do vídeo e o público-alvo.\n\nPrecisão no Tempo:\nPara garantir que cada imagem corresponda ao momento exato do vídeo, o agente deve calcular e alinhar o tempo médio sugerido pelo primeiro agente, dividindo o vídeo em blocos de 4-5 segundos e criando imagens que sigam essa lógica.\nSe necessário, ele pode ajustar o número de imagens com base na narrativa do vídeo (por exemplo, cenas mais dinâmicas podem exigir mais imagens em menos tempo).\n\nExemplo de Prompts para Imagens:\nCenário 1 (Primeiros 4-5 segundos):\n“Um monge sentado em um templo minimalista, cercado por uma leve névoa no nascer do sol. A luz suave reflete nos vitrais, criando um ambiente calmo e introspectivo. Tons de dourado e verde predominam, simbolizando paz e equilíbrio.”\n\nCenário 2 (Próximos 4-5 segundos):\n“Um cérebro humano visto em uma interface futurista, com linhas de código e sinais neurais sendo manipulados em tempo real. Luzes em azul e verde, com um fundo escuro para representar tecnologia avançada e biohacking.”\n\nManutenção da Coerência Temática:\nO agente deve garantir que as imagens mantenham a coerência com a sequência do vídeo e o tema central do perfil do usuário, que inclui motivação espiritual, mindfulness, biohacking e neurociência. Ele deve evitar que as imagens pareçam desconexas ou quebrem o fluxo narrativo.\n\nBase de Conhecimento e Feedback:\nO agente deverá consultar a base de conhecimento que será periodicamente alimentada, para garantir que as imagens estejam sempre alinhadas com o conteúdo já criado e respeitando as diretrizes das plataformas como TikTok e Instagram."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        640,
+        0
+      ],
+      "id": "3737fb7d-8879-41a6-b607-282641e40d6e",
+      "name": "Ger. Prompt IMG"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output }}",
+        "options": {
+          "systemMessage": "Objetivo do Agente: Atue como um especialista em análise de roteiros de vídeo para geração de prompts de imagem.\nSua função é analisar trechos específicos de um roteiro e, com base nesses trechos, criar prompts detalhados para a criação de imagens. Cada prompt deve representar uma cena de 4-5 segundos do vídeo e seguir rigorosamente a sequência apresentada no roteiro.\n\nInstruções para o Agente:\nAnálise do Roteiro:\nComece analisando o roteiro de vídeo fornecido. Identifique momentos que correspondam a um intervalo de tempo de aproximadamente 4-5 segundos. Para cada trecho identificado, crie um único prompt de imagem.\n\nGeração de Um Prompt por Vez:\n\n    A cada solicitação, você deve gerar apenas um prompt de imagem por vez.\n    O prompt deve estar relacionado a um trecho específico do roteiro, sempre respeitando a sequência cronológica dos eventos descritos.\n    Certifique-se de que o prompt gerado seja fiel ao contexto do trecho analisado, garantindo uma descrição clara e visualmente precisa da cena.\n\nSequência de Geração:\n\n    Comece a geração de prompts imediatamente após analisar o primeiro trecho do roteiro.\n    Não avance automaticamente para os próximos prompts. Após gerar um prompt, aguarde a próxima solicitação para continuar o processo.\n    O agente deve manter a sequência lógica do roteiro, gerando os prompts de acordo com a ordem exata dos eventos descritos.\n\nFinalização do Processo:\n\n    Continue gerando prompts individualmente até que todos os prompts necessários tenham sido gerados.\n    Ao final da geração de todos os prompts, encerre a execução do agente e retorne a seguinte resposta: \"[null]\".\n\nOrganização e Ordem:\n\n    É essencial que cada prompt seja gerado na mesma ordem em que os eventos aparecem no roteiro, sem pular ou reorganizar trechos.\n    Certifique-se de manter a sequência correta durante toda a execução do agente.\n\nApresentação do Resultado:\nCada prompt gerado deve ser apresentado de forma clara e numerada, para facilitar a criação de imagens subsequentes.\nExemplo de output:\n\n    Prompt 1: “Cenário calmo de floresta com raios de sol, um homem meditando sob uma árvore.”\n    Prompt 2: “O homem abre os olhos e, ao fundo, uma energia espiritual começa a surgir.”\n\nContinue esse processo até a conclusão de todos os prompts necessários.\n\nExemplo de Operação do Agente:\nInput de roteiro:\n\n    Cenário calmo de floresta com raios de sol, um homem meditando sob uma árvore.\n    O homem abre os olhos e, ao fundo, uma energia espiritual começa a surgir.\n\nOutput do Agente:\n\n    Prompt 1: “Cenário calmo de floresta com raios de sol, um homem meditando sob uma árvore.”\n    Após solicitação do próximo prompt em:\n    [Prompt 2: “[próximo prompt]”]\n\nFinalização:\nApós gerar todos os prompts, o agente retorna: \"[null]\".\nNota: Após terminar a sequência de prompts, você deve responder apenas com a mensagem \"[null]\", sem incluir nenhum texto a mais e nem a menos.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        960,
+        0
+      ],
+      "id": "070b8417-2ef5-4822-a747-00766e42a448",
+      "name": "Extrai Prompts"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.2-90b-text-preview",
+        "options": {
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        340,
+        160
+      ],
+      "id": "d604112a-2fcf-429c-b672-f669edd97512",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "wujIl27yzdv1Sk3E",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama-3.2-90b-text-preview",
+        "options": {
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        660,
+        160
+      ],
+      "id": "6c54989b-2a3d-42a9-a55e-c63f31a670d2",
+      "name": "Groq Chat Model1",
+      "credentials": {
+        "groqApi": {
+          "id": "wujIl27yzdv1Sk3E",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama-3.2-90b-text-preview",
+        "options": {
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        960,
+        160
+      ],
+      "id": "51c5ee14-0907-4dc3-b298-8e455eb147a6",
+      "name": "Groq Chat Model2",
+      "credentials": {
+        "groqApi": {
+          "id": "wujIl27yzdv1Sk3E",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Crypto').item.json.data }}",
+        "contextWindowLength": 50
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.2,
+      "position": [
+        1060,
+        160
+      ],
+      "id": "47f18f8e-046f-44ff-9c30-9118b8283d49",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-exp-1114",
+        "options": {
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        260
+      ],
+      "id": "267b3a68-e1fc-4212-bb05-a94788b20e62",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "WpHnSTAMyFJlrZzt",
+          "name": "API Gemini"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.data[0].url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2000,
+        100
+      ],
+      "id": "7b77bf5b-86f4-4319-bc06-8fdf18388a34",
+      "name": "Baixa Imagem"
+    },
+    {
+      "parameters": {
+        "name": "={{ $binary.data.fileName }} ",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "root",
+          "cachedResultName": "/ (Root folder)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2160,
+        100
+      ],
+      "id": "aaa06bf7-1521-4b3e-886c-3f68a327832c",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "rMpn4fQnklxYaVAA",
+          "name": "API Key "
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Extrai Prompts').last().json.output }}",
+        "options": {
+          "systemMessage": "Você tem o objetivo de dizer ao próximo agente que ele deve prosseguir com o próximo prompt.\nApenas isto, que ele pode prosseguir com o próximo prompt.\n\n**Você deve seguir as instruções passo a passo e estritamente dentro delas.**"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        2320,
+        100
+      ],
+      "id": "00953e7e-d4aa-400e-9f33-d317eb298643",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        2340,
+        260
+      ],
+      "id": "25bea7e7-efd6-4e50-8417-849e9ebfda14",
+      "name": "Groq Chat Model3",
+      "credentials": {
+        "groqApi": {
+          "id": "wujIl27yzdv1Sk3E",
+          "name": "Groq account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Crypto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crypto": {
+      "main": [
+        [
+          {
+            "node": "Ger. Tema",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ger. Tema": {
+      "main": [
+        [
+          {
+            "node": "Ger. Prompt IMG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "API Flux",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API Flux": {
+      "main": [
+        [
+          {
+            "node": "Baixa Imagem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ger. Prompt IMG": {
+      "main": [
+        [
+          {
+            "node": "Extrai Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrai Prompts": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Ger. Tema",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Ger. Prompt IMG",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Extrai Prompts",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Extrai Prompts",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Baixa Imagem": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ce7cc3b8-45a1-462d-bef1-a2b20a5b4116",
+  "meta": {
+    "instanceId": "ab7794a9f7a89a320266f1efef6838c2e0bf0f8f7a0d32f2ed70fdaa6aef27ee"
+  },
+  "id": "FdGUcG4HRkqjUJtE",
+  "tags": []
+}
